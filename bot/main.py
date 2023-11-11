@@ -123,7 +123,7 @@ def enter_bio(message):
 	index = len(message.photo)-1
 	file_path = bot.get_file(message.photo[index].file_id).file_path
 	file = bot.download_file(file_path)
-	filename = 'photo/' + str(user_id) + '.png'
+	filename = 'photo/' + str(user_id) + '.jpg'
 	with open(filename, "wb") as code:
 		code.write(file)
 
@@ -158,8 +158,6 @@ def end(message):
 	qrcode = open('media/temp.png', 'rb')
 	bot.send_photo(message.from_user.id, qrcode, caption=f'Успешно! Ссылка на вашу визитку: {url}\nСоздать ещё - /new')
 	url = 'https://dd-forms.vercel.app/card/{}'.format(user_id)
-
-	bot.send_message(message.from_user.id, 'Успешно! Ссылка на вашу визитку: {}'.format(url))
 
 
 
