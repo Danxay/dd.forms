@@ -1,7 +1,9 @@
-from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
 import sqlite3
+from contextlib import closing
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
 
@@ -20,22 +22,22 @@ app.add_middleware(
 
 app.mount("/images", StaticFiles(directory="../bot/photo"), name="images")
 
+
 @app.get("/card/{id}")
 async def get_data(id: int):
-    con = sqlite3.connect("../bot/data.db")
-    cursor = con.cursor()
-    cursor.execute(f"SELECT * FROM data WHERE id = {id}")
-    result = cursor.fetchone()
-    response = {
-        'id': result[0],
-        'fullname': result[1],
-        'telegram': result[2],
-        'vk': result[3],
-        'contact': result[4],
-        'type': result[5],
-        'bio': result[6],
-    }
-    con.close()
-    return response
+    with closing(sqlite3.connect("../bot/data.db")) as con, con, \
+            closing(con.cursor()) as cur:
+        cur.execute(f"SELECT * FROM data WHERE id = {id}")
+        result = cur.fetchone()
+        response = {
+            'id': result[0],
+            'fullname': result[1],
+            'telegram': result[2],
+            'vk': result[3],
+            'contact': result[4],
+            'type': result[5],
+            'bio': result[6],
+        }
+        return response
 
 # uvicorn main:app --host 0.0.0.0 --port 8888
