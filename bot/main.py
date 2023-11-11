@@ -141,19 +141,19 @@ def end(message):
 	cur = conn.cursor()
 	cur.execute("INSERT INTO data (id) VALUES (?)", (user_id,))
 	cur.execute("UPDATE data SET fullname = '{}' WHERE id = '{}'".format(name, user_id))
-	cur.execute("UPDATE data SET telegram = {} WHERE id = {}".format(tg, user_id))
-	cur.execute(f"UPDATE data SET vk = '{vk}' WHERE id = '{user_id}'")
-	cur.execute(f"UPDATE data SET contact = '{contact}' WHERE id = '{user_id}'")
-	cur.execute(f"UPDATE data SET type = '{type0}' WHERE id = '{user_id}'")
-	cur.execute(f"UPDATE data SET bio = '{bio}' WHERE id = '{user_id}'")
+	cur.execute("UPDATE data SET telegram = '{}' WHERE id = '{}'".format(tg, user_id))
+	cur.execute("UPDATE data SET vk = '{}' WHERE id = '{}'".format(vk, user_id))
+	cur.execute("UPDATE data SET contact = '{}' WHERE id = '{}'".format(contact, user_id))
+	cur.execute("UPDATE data SET type = '{}' WHERE id = '{}'".format(type0, user_id))
+	cur.execute("UPDATE data SET bio = '{}' WHERE id = '{}'".format(bio, user_id))
 	conn.commit()
 	cur.close()
 	conn.close()
 
 	#Returning result
-	url = f'https://dd-forms.vercel.app/card/{user_id}'
+	url = 'https://dd-forms.vercel.app/card/{}'.format(user_id)
 
-	bot.send_message(message.from_user.id, f'Успешно! Ссылка на вашу визитку: {url}')
+	bot.send_message(message.from_user.id, 'Успешно! Ссылка на вашу визитку: {}'.format(url))
 
 
 
