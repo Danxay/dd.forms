@@ -5,21 +5,19 @@ import styles from './CardWithBanner.module.scss'
 
 import cn from 'classnames'
 
-export const CardWithBanner = ({image, name, bio, links, phone, email}) => {
-    console.log(image)
+export const CardWithBanner = ({data}) => {
   return (
     <article className={styles.wrapper}>
-        {/* <Image src={image} width={150} height={150} alt="Аватарка" className={styles.image} /> */}
-        <img src={image} alt="Аватарка" className={styles.image} />
+         <Image src={data.image} width={150} height={150} alt="Аватарка" className={styles.image} />
         <div className={styles.banner}></div>
-        <h1 className={styles.name}>{name}</h1>
-        {bio && <p className={styles.bio}>{bio}</p>}
+        <h1 className={styles.name}>{data.fullname}</h1>
+        {data.bio && <p className={styles.bio}>{data.bio}</p>}
         <div className={styles.links}>
-            {Object.keys(links).map(link => <a className={cn(styles.link, link)} href={links[link]} key={link}></a>)}
+          <a className={cn(styles.link, "vk")} href={data.telegram} key={data.telegram}></a>
+          <a className={cn(styles.link, "telegram")} href={data.vk} key={data.vk}></a>
         </div>
         <hr className={styles.line} />
-        {phone && <a className={styles.phone}>{phone}</a>}
-        {email && <a href={`mailto: ${email}`} className={styles.email}>{email}</a>}
+        <a className={styles.contact}>{data.contact}</a>
     </article>
   );
 };
