@@ -5,7 +5,7 @@ import {notFound} from "next/navigation";
 import {CardWithoutBanner} from "@/components/CardWithoutBanner/CardWithoutBanner";
 
 async function getData(id) {
-  const response = await fetch(`http://0.0.0.0:8888/card/${id}`, {next: {revalidate: 30}});
+  const response = await fetch(`http://37.49.209.63:1300/card/${id}`, {next: {revalidate: 30}});
 
   if (!response.ok) {
     return notFound();
@@ -16,7 +16,7 @@ async function getData(id) {
 
 const CardPage = async ({params}) => {
   const data = await getData(params.id);
-  data.image = `http://0.0.0.0:8888/images/${data.id}.jpg`
+  data.image = `http://37.49.209.63:1300/${data.id}.jpg`
 
   return <div className={cn("container", styles.container)}>
     {data.type == 1 && <CardWithoutBanner data={data}/>}
