@@ -7,8 +7,7 @@ from telebot import *
 from telebot.types import *
 
 # VARs
-bot = TeleBot('5339912132:AAHeHNQFw8eivq4ub25QL3OOULZlFs_Ea3Q')
-print('КОСТЫЛЬ')
+bot = TeleBot('6825416721:AAHEj60rxo7jU28vgchcHKG5HrK4C1V0ggY')
 
 name = ''
 vk = ''
@@ -100,9 +99,11 @@ def type_select(message):
 
     # Select type
     type1_photo = open('media/type1.jpg', 'rb')
+    type2_photo = open('media/type2.png', 'rb')
     markup = ReplyKeyboardMarkup(resize_keyboard=True)
-    markup.add(KeyboardButton('1'))
-    bot.send_photo(message.from_user.id, type1_photo, caption='Выберите макет визитки:', reply_markup=markup)
+    markup.add(KeyboardButton('1'), KeyboardButton('2'))
+    bot.send_photo(message.from_user.id, type1_photo)
+    bot.send_photo(message.from_user.id, type2_photo, caption='Выберите макет визитки:', reply_markup=markup)
     bot.register_next_step_handler(message, upload_photo)
 
 
@@ -128,7 +129,7 @@ def enter_bio(message):
         code.write(file)
 
     # Enter bio
-    bot.send_message(message.from_user.id,'Напишите кратко о себе (например о том, чем вы занимаетесь, какую должность в какой компании вы занимаете): ')
+    bot.send_message(message.from_user.id,'Напишите кратко о себе (например о том, чем вы занимаетесь, какую должность в какой компании вы занимаете): ', reply_markup=ReplyKeyboardRemove())
     bot.register_next_step_handler(message, end)
 
 
