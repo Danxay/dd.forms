@@ -1,3 +1,5 @@
+
+
 import sqlite3
 import telebot
 from telebot import *
@@ -138,8 +140,8 @@ def end(message):
 	conn = sqlite3.connect('data.db')
 	cur = conn.cursor()
 	cur.execute("INSERT INTO data (id) VALUES (?)", (user_id,))
-	cur.execute(f"UPDATE data SET fullname = '{name}' WHERE id = '{user_id}'")
-	cur.execute(f"UPDATE data SET telegram = '{tg}' WHERE id = '{user_id}'")
+	cur.execute("UPDATE data SET fullname = '{}' WHERE id = '{}'".format(name, user_id))
+	cur.execute("UPDATE data SET telegram = {} WHERE id = {}".format(tg, user_id))
 	cur.execute(f"UPDATE data SET vk = '{vk}' WHERE id = '{user_id}'")
 	cur.execute(f"UPDATE data SET contact = '{contact}' WHERE id = '{user_id}'")
 	cur.execute(f"UPDATE data SET type = '{type0}' WHERE id = '{user_id}'")
