@@ -39,6 +39,8 @@ async def get_data(id: int):
             }
             con.close()
             return response
-            break
+            
+        except:
+            pass
 
 # uvicorn main:app --host 0.0.0.0 --port 8888
