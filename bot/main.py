@@ -41,11 +41,9 @@ def start(message):
     user_id = gen_id()
 
     if message.text == '/start':
-        bot.send_message(message.from_user.id, 'Здравствуйте, введите ваше имя и фамилию:',
-                         reply_markup=ReplyKeyboardRemove())
+        bot.send_message(message.from_user.id, 'Здравствуйте, введите ваше имя и фамилию:',reply_markup=ReplyKeyboardRemove())
     else:
-        bot.send_message(message.from_user.id, "Введите имя и фамилию, которое будет отображаться на визитке:",
-                         reply_markup=ReplyKeyboardRemove())
+        bot.send_message(message.from_user.id, "Введите имя и фамилию, которое будет отображаться на визитке:",reply_markup=ReplyKeyboardRemove())
     bot.register_next_step_handler(message, tg_enter)
 
 
@@ -90,8 +88,7 @@ def contact_enter(message):
         vk = message.text
 
     # Email or phone enter
-    bot.send_message(message.from_user.id, 'Введите способ связи с вами (телефон или почта):',
-                     reply_markup=ReplyKeyboardRemove())
+    bot.send_message(message.from_user.id, 'Введите способ связи с вами (телефон или почта):',reply_markup=ReplyKeyboardRemove())
     bot.register_next_step_handler(message, type_select)
 
 
@@ -116,8 +113,7 @@ def upload_photo(message):
     type0 = message.text
 
     # Upload photo
-    bot.send_message(message.from_user.id, 'Загрузите фото, которое будет отображено на визитке:',
-                     reply_markup=ReplyKeyboardRemove())
+    bot.send_message(message.from_user.id, 'Загрузите фото, которое будет отображено на визитке:',reply_markup=ReplyKeyboardRemove())
     bot.register_next_step_handler(message, enter_bio)
 
 
@@ -132,8 +128,7 @@ def enter_bio(message):
         code.write(file)
 
     # Enter bio
-    bot.send_message(message.from_user.id,
-                     'Напишите кратко о себе (например о том, чем вы занимаетесь, какую должность в какой компании вы занимаете): ')
+    bot.send_message(message.from_user.id,'Напишите кратко о себе (например о том, чем вы занимаетесь, какую должность в какой компании вы занимаете): ')
     bot.register_next_step_handler(message, end)
 
 
