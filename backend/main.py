@@ -7,6 +7,7 @@ app = FastAPI()
 
 origins = [
     "https://dd-forms-danxay.vercel.app",
+    "https://dd-forms.vercel.app",
 ]
 
 app.add_middleware(
