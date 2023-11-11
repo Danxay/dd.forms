@@ -21,7 +21,7 @@ user_id = ''
 
 # DEFs
 def gen_id():
-    with closing(sqlite3.connect("../bot/data.db")) as con, con, \
+    with closing(sqlite3.connect("data.db")) as con, con, \
             closing(con.cursor()) as cursor:
         cursor.execute('SELECT id FROM data')
         ids = cursor.fetchall()
@@ -144,7 +144,7 @@ def end(message):
     bio = message.text
 
     # Write data to database
-    with closing(sqlite3.connect("../bot/data.db")) as con, con, \
+    with closing(sqlite3.connect("data.db")) as con, con, \
             closing(con.cursor()) as cur:
         cur.execute("INSERT INTO data (id) VALUES (?)", (user_id,))
         cur.execute("UPDATE data SET fullname = '{}' WHERE id = '{}'".format(name, user_id))
