@@ -39,7 +39,6 @@ async def get_data(id: int):
             }
             con.close()
             return response
-            
         except:
             pass
 
