@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-=======
 # -*- coding: utf-8 -*-
->>>>>>> e76a2186d904064cfa3bc62203271f4f658fa0b2
-=======
-# -*- coding: utf-8 -*-
->>>>>>> e76a2186d904064cfa3bc62203271f4f658fa0b2
 import sqlite3
 import telebot
 from telebot import *
