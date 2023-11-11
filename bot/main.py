@@ -3,11 +3,12 @@ import sqlite3
 import telebot
 from telebot import *
 from telebot.types import *
+import segno
 
 
 
 #VARs
-bot = TeleBot('6825416721:AAHEj60rxo7jU28vgchcHKG5HrK4C1V0ggY')
+bot = TeleBot('5339912132:AAHeHNQFw8eivq4ub25QL3OOULZlFs_Ea3Q')
 print('КОСТЫЛЬ')
 
 name = ''
@@ -152,8 +153,10 @@ def end(message):
 
 	#Returning result
 	url = f'https://dd-forms.vercel.app/card/{user_id}'
-
-	bot.send_message(message.from_user.id, f'Успешно! Ссылка на вашу визитку: {url}')
+	qr = segno.make_qr(url)
+	qr.save('media/temp.png', border=5, scale=7)
+	qrcode = open('media/temp.png', 'rb')
+	bot.send_photo(message.from_user.id, qrcode, caption=f'Успешно! Ссылка на вашу визитку: {url}\nСоздать ещё - /new')
 
 
 
