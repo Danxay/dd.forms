@@ -151,13 +151,15 @@ def end(message):
         con.commit()
 
 
-# Returning result
-url = f'https://dd-forms.vercel.app/card/{user_id}'
-qr = segno.make_qr(url)
-qr.save('media/temp.png', border=5, scale=7)
-qrcode = open('media/temp.png', 'rb')
-bot.send_photo(message.from_user.id, qrcode, caption=f'Успешно! Ссылка на вашу визитку: {url}\nСоздать ещё - /new')
-url = 'https://dd-forms.vercel.app/card/{}'.format(user_id)
+	# Returning result
+	url = f'https://dd-forms.vercel.app/card/{user_id}'
+	qr = segno.make_qr(url)
+	qr.save('media/temp.png', border=5, scale=7)
+	qrcode = open('media/temp.png', 'rb')
+	bot.send_photo(message.from_user.id, qrcode, caption=f'Успешно! Ссылка на вашу визитку: {url}\nСоздать ещё - /new')
+	url = 'https://dd-forms.vercel.app/card/{}'.format(user_id)
+
+
 
 # Main polling
 bot.infinity_polling()
