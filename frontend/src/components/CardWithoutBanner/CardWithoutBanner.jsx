@@ -5,20 +5,18 @@ import styles from './CardWithoutBanner.module.scss'
 
 import cn from 'classnames'
 
-export const CardWithoutBanner = ({image, name, bio, links, phone, email}) => {
-    console.log(image)
+export const CardWithoutBanner = ({data}) => {
   return (
     <article className={styles.wrapper}>
-        {/* <Image src={image} width={150} height={150} alt="Аватарка" className={styles.image} /> */}
-        <img src={image} alt="Аватарка" className={styles.image} />
-        <h1 className={styles.name}>{name}</h1>
-        {bio && <p className={styles.bio}>{bio}</p>}
-        <div className={styles.links}>
-            {Object.keys(links).map(link => <a className={cn(styles.link, link)} href={links[link]} key={link}></a>)}
-        </div>
-        <hr className={styles.line} />
-        {phone && <a className={styles.phone}>{phone}</a>}
-        {email && <a href={`mailto: ${email}`} className={styles.email}>{email}</a>}
+      <Image src={data.image} width={150} height={150} alt="Аватарка" className={styles.image}/>
+      <h1 className={styles.name}>{data.fullname}</h1>
+      <p className={styles.bio}>{data.bio}</p>
+      <div className={styles.links}>
+        <a className={cn(styles.link, "vk")} href={data.telegram} key={data.telegram}></a>
+        <a className={cn(styles.link, "telegram")} href={data.vk} key={data.vk}></a>
+      </div>
+      <hr className={styles.line}/>
+      <a href={data.contact} className={styles.contact}>{data.contact}</a>
     </article>
   );
 };

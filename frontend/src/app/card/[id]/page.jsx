@@ -1,33 +1,27 @@
-import { CardWithoutBanner } from "@/components/CardWithoutBanner/CardWithoutBanner";
-import { CardWithBanner } from "@/components/CardWithBanner/CardWithBanner";
+import {CardWithBanner} from "@/components/CardWithBanner/CardWithBanner";
 import cn from "classnames";
 import styles from "./page.module.scss"
+import {notFound} from "next/navigation";
+import {CardWithoutBanner} from "@/components/CardWithoutBanner/CardWithoutBanner";
 
 async function getData(id) {
-  // const response = await fetch(`http://localhost:3000/api/projects/${id}`, {next: {revalidate: 30}});
+  const response = await fetch(`http://0.0.0.0:8888/card/${id}`, {next: {revalidate: 30}});
 
-  // if (!response.ok) {
-  //   return notFound();
-  // }
-  //
-  // return response.json();
-
-  const response = {
-    image: "https://i1.sndcdn.com/artworks-nbXEtIsuHFab90iU-mPzLmw-t500x500.jpg",
-      name: "Дарья Шиханова",
-      bio: "event-менеджер в компании",
-      links: {"vk": "https://vk.com", "tg": "https://t.me"},
-      phone: null,
-      email: "erger@mail.ru"
+  if (!response.ok) {
+    return notFound();
   }
 
-  return response
+  return response.json();
 }
 
 const CardPage = async ({params}) => {
   const data = await getData(params.id);
+  data.image = `http://0.0.0.0:8888/images/${data.id}.jpg`
 
-  return <div className={cn("container", styles.container)}><CardWithBanner image={data.image} name={data.name} bio={data.bio} links={data.links} phone={data.phone} email={data.email}/></div>;
+  return <div className={cn("container", styles.container)}>
+    {data.type == 1 && <CardWithoutBanner data={data}/>}
+    {data.type == 2 && <CardWithBanner data={data}/>}
+  </div>;
 };
 
 export default CardPage;
