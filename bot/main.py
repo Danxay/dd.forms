@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 
 
+=======
+# -*- coding: utf-8 -*-
+>>>>>>> e76a2186d904064cfa3bc62203271f4f658fa0b2
 import sqlite3
 import telebot
 from telebot import *
@@ -9,6 +13,7 @@ from telebot.types import *
 
 #VARs
 bot = TeleBot('6825416721:AAHEj60rxo7jU28vgchcHKG5HrK4C1V0ggY')
+print('КОСТЫЛЬ')
 
 name = ''
 vk = ''
@@ -151,7 +156,9 @@ def end(message):
 	conn.close()
 
 	#Returning result
-	bot.send_message(message.from_user.id, 'Успешно!')
+	url = f'https://dd-forms.vercel.app/card/{user_id}'
+
+	bot.send_message(message.from_user.id, f'Успешно! Ссылка на вашу визитку: {url}')
 
 
 
