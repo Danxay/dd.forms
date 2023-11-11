@@ -12,8 +12,8 @@ export const CardWithoutBanner = ({data}) => {
       <h1 className={styles.name}>{data.fullname}</h1>
       <p className={styles.bio}>{data.bio}</p>
       <div className={styles.links}>
-        <a className={cn(styles.link, "vk")} href={data.telegram} key={data.telegram}></a>
-        <a className={cn(styles.link, "telegram")} href={data.vk} key={data.vk}></a>
+        {data.vk && <a className={cn(styles.link, "vk")} href={data.vk} key={data.vk}></a>}
+        {data.telegram && <a className={cn(styles.link, "telegram")} href={data.telegram} key={data.telegram}></a>}
       </div>
       <hr className={styles.line}/>
       <a href={data.contact} className={styles.contact}>{data.contact}</a>
