@@ -24,13 +24,12 @@ def gen_id():
 	cursor = con.cursor()
 	cursor.execute('SELECT id FROM data')
 	ids = cursor.fetchall()
-	id1 = '0'
+	id1 = 0
 	for id0 in ids:
-		print(id0)
-		#if int(id1) < int(ids[id0]):
-		#	id1 = id0
+		if id1 < int(id0[0]):
+			id1 = int(id0[0])
 
-	#return (id1+1)
+	return (id1+1)
 
 	cursor.close()
 	con.close()
@@ -40,7 +39,10 @@ def gen_id():
 #Name enter
 @bot.message_handler(commands=['start', 'new'])
 def start(message):
-	gen_id()
+	#Set user_id
+	global user_id
+	user_id = gen_id()
+
 	if message.text == '/start':
 		bot.send_message(message.from_user.id, 'Здравствуйте, введите ваше имя и фамилию:', reply_markup=ReplyKeyboardRemove())
 	else:
@@ -115,10 +117,10 @@ def upload_photo(message):
 #Download photo and enter bio
 def enter_bio(message):
 	#Download photo
-	file_path = bot.get_file(message.photo[3].file_id).file_path
-	print(message.photo)
+	index = len(message.photo)-1
+	file_path = bot.get_file(message.photo[index].file_id).file_path
 	file = bot.download_file(file_path)
-	filename = 'photo/' + user_id + '.png'
+	filename = 'photo/' + str(user_id) + '.png'
 	with open(filename, "wb") as code:
 		code.write(file)
 
