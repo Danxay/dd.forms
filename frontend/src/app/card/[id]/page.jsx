@@ -16,7 +16,7 @@ async function getData(id) {
 
 const CardPage = async ({params}) => {
   const data = await getData(params.id);
-  data.image = `http://37.49.209.63:1300/images/${data.id}.jpg`
+  data.image = `http://37.49.209.63:1300/images/${data.id}.png`
 
   return <div className={cn("container", styles.container)}>
     {data.type == 1 && <CardWithoutBanner data={data}/>}
