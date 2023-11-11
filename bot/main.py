@@ -130,12 +130,27 @@ def enter_bio(message):
 
 #Write data to database and save bio
 def end(message):
-	global bio
+	global name, vk, contact, type0, bio, tg, user_id
 	#Save bio
 	bio = message.text
 
 	#Write data to database
-	print('write')
+	conn = sqlite3.connect('data.db')
+	cur = conn.cursor()
+	cur.execute("INSERT INTO data (id) VALUES (?)", (user_id,))
+	cur.execute(f"UPDATE data SET fullname = '{name}' WHERE id = '{user_id}'")
+	cur.execute(f"UPDATE data SET telegram = '{tg}' WHERE id = '{user_id}'")
+	cur.execute(f"UPDATE data SET vk = '{vk}' WHERE id = '{user_id}'")
+	cur.execute(f"UPDATE data SET contact = '{contact}' WHERE id = '{user_id}'")
+	cur.execute(f"UPDATE data SET type = '{type0}' WHERE id = '{user_id}'")
+	cur.execute(f"UPDATE data SET bio = '{bio}' WHERE id = '{user_id}'")
+	conn.commit()
+	cur.close()
+	conn.close()
+
+	#Returning result
+	bot.send_message(message.from_user.id, 'Успешно!')
+
 
 
 
