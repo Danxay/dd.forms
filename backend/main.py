@@ -3,6 +3,19 @@ from fastapi.staticfiles import StaticFiles
 import sqlite3
 
 app = FastAPI()
+
+origins = [
+    "https://dd-forms-danxay.vercel.app",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 con = sqlite3.connect("../bot/data.db")
 cursor = con.cursor()
 
