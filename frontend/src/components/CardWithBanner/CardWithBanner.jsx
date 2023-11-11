@@ -8,7 +8,8 @@ import cn from 'classnames'
 export const CardWithBanner = ({data}) => {
   return (
     <article className={styles.wrapper}>
-      <Image src={data.image} width={150} height={150} alt="Аватарка" className={styles.image}/>
+      {/*<Image src={data.image} width={150} height={150} alt="Аватарка" className={styles.image}/>*/}
+      <img src={data.image} alt="Аватарка" className={styles.image}/>
       <div className={styles.banner}></div>
       <h1 className={styles.name}>{data.fullname}</h1>
       <p className={styles.bio}>{data.bio}</p>
