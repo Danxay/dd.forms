@@ -14,17 +14,33 @@ contact = ''
 type0 = ''
 bio = ''
 tg = ''
+user_id = ''
 
 
 
 #DEFs
+def gen_id():
+	con = sqlite3.connect("data.db")
+	cursor = con.cursor()
+	cursor.execute('SELECT id FROM data')
+	ids = cursor.fetchall()
+	id1 = '0'
+	for id0 in ids:
+		print(id0)
+		#if int(id1) < int(ids[id0]):
+		#	id1 = id0
 
+	#return (id1+1)
+
+	cursor.close()
+	con.close()
 
 
 
 #Name enter
 @bot.message_handler(commands=['start', 'new'])
 def start(message):
+	gen_id()
 	if message.text == '/start':
 		bot.send_message(message.from_user.id, 'Здравствуйте, введите ваше имя и фамилию:', reply_markup=ReplyKeyboardRemove())
 	else:
@@ -83,7 +99,41 @@ def type_select(message):
 	type1_photo = open('media/type1.jpg', 'rb')
 	markup = ReplyKeyboardMarkup(resize_keyboard=True)
 	markup.add(KeyboardButton('1'))
-	bot.send_photo(message.from_user.id, photo, caption='Выберите макет визитки:', reply_markup=markup)
+	bot.send_photo(message.from_user.id, type1_photo, caption='Выберите макет визитки:', reply_markup=markup)
+	bot.register_next_step_handler(message, upload_photo)
+
+#Upload photo and save type
+def upload_photo(message):
+	global type0
+	#Save type
+	type0 = message.text
+
+	#Upload photo
+	bot.send_message(message.from_user.id, 'Загрузите фото, которое будет отображено на визитке:', reply_markup=ReplyKeyboardRemove())
+	bot.register_next_step_handler(message, enter_bio)
+
+#Download photo and enter bio
+def enter_bio(message):
+	#Download photo
+	file_path = bot.get_file(message.photo[3].file_id).file_path
+	print(message.photo)
+	file = bot.download_file(file_path)
+	filename = 'photo/' + user_id + '.png'
+	with open(filename, "wb") as code:
+		code.write(file)
+
+	#Enter bio
+	bot.send_message(message.from_user.id, 'Напишите кратко о себе (например о том, чем вы занимаетесь, какую должность в какой компании вы занимаете): ')
+	bot.register_next_step_handler(message, end)
+
+#Write data to database and save bio
+def end(message):
+	global bio
+	#Save bio
+	bio = message.text
+
+	#Write data to database
+	print('write')
 
 
 
