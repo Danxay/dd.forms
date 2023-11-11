@@ -28,23 +28,23 @@ class App:
     @app.get("/card/{id}")
     async def get_data(id: int):
         while True:
-        try:
-            con = sqlite3.connect("../bot/data.db")
-            cursor = con.cursor()
-            cursor.execute(f"SELECT * FROM data WHERE id = {id}")
-            result = cursor.fetchone()
-            response = {
-                'id': result[0],
-                'fullname': result[1],
-                'telegram': result[2],
-                'vk': result[3],
-                'contact': result[4],
-                'type': result[5],
-                'bio': result[6],
-            }
-            con.close()
-            return response
-            break
+            try:
+                con = sqlite3.connect("../bot/data.db")
+                cursor = con.cursor()
+                cursor.execute(f"SELECT * FROM data WHERE id = {id}")
+                result = cursor.fetchone()
+                response = {
+                    'id': result[0],
+                    'fullname': result[1],
+                    'telegram': result[2],
+                    'vk': result[3],
+                    'contact': result[4],
+                    'type': result[5],
+                    'bio': result[6],
+                }
+                con.close()
+                return response
+                break
 
 app = App()
 
