@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import sqlite3
 from contextlib import closing
-
 import segno
 from telebot import *
 from telebot.types import *
