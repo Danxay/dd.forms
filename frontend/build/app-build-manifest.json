@@ -1,0 +1,28 @@
+{
+  "pages": {
+    "/_not-found": [
+      "static/chunks/webpack-ea7acc51824a2b9d.js",
+      "static/chunks/fd9d1056-5517b4ab1905cb09.js",
+      "static/chunks/472-ebff5f4bdf87292b.js",
+      "static/chunks/main-app-0f6162e466b08967.js",
+      "static/chunks/app/_not-found-21300f601eee6904.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-ea7acc51824a2b9d.js",
+      "static/chunks/fd9d1056-5517b4ab1905cb09.js",
+      "static/chunks/472-ebff5f4bdf87292b.js",
+      "static/chunks/main-app-0f6162e466b08967.js",
+      "static/css/c6be95520ca7e894.css",
+      "static/chunks/app/layout-de35ac0c276491b5.js"
+    ],
+    "/card/[id]/page": [
+      "static/chunks/webpack-ea7acc51824a2b9d.js",
+      "static/chunks/fd9d1056-5517b4ab1905cb09.js",
+      "static/chunks/472-ebff5f4bdf87292b.js",
+      "static/chunks/main-app-0f6162e466b08967.js",
+      "static/chunks/413-dd2d1e77cac135ea.js",
+      "static/css/ba18c768d4d06d33.css",
+      "static/chunks/app/card/[id]/page-88e018d132db6da7.js"
+    ]
+  }
+}
